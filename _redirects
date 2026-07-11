@@ -1,0 +1,19 @@
+# Everlasting Hibachi — Redirects (Cloudflare Pages / Netlify)
+/home /  301
+/booking /book-online/ 301
+/locations /service-area/ 301
+/pricing /menu/ 301
+/photos /gallery/ 301
+
+# Trailing slash normalization
+/menu /menu/ 301
+/faq /faq/ 301
+/gallery /gallery/ 301
+/contact /contact/ 301
+/book-online /book-online/ 301
+/service-area /service-area/ 301
+/georgia /georgia/ 301
+/tennessee /tennessee/ 301
+/alabama /alabama/ 301
+/north-carolina /north-carolina/ 301
+/south-carolina /south-carolina/ 301
