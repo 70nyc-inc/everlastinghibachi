@@ -156,45 +156,7 @@ const states = [
   },
 ];
 
-// ---- City pages ----
-const cities = [
-  { slug: 'atlanta-hibachi-at-home', name: 'Atlanta', state: 'Georgia', stateSlug: 'georgia', abbr: 'GA', emoji: '🏙️',
-    desc: 'Atlanta, Georgia\'s capital and largest city, is home to millions of families, professionals, and party hosts looking for a unique backyard experience.',
-    nearby: ['Sandy Springs', 'Roswell', 'Marietta', 'Alpharetta', 'Decatur', 'Smyrna', 'Johns Creek'] },
-  { slug: 'nashville-hibachi-at-home', name: 'Nashville', state: 'Tennessee', stateSlug: 'tennessee', abbr: 'TN', emoji: '🎸',
-    desc: 'Music City is full of energy — and your next backyard party should be too. Everlasting Hibachi brings the live fire show to Nashville homes and venues.',
-    nearby: ['Brentwood', 'Franklin', 'Murfreesboro', 'Hendersonville', 'Smyrna', 'Mt. Juliet', 'Gallatin'] },
-  { slug: 'memphis-hibachi-at-home', name: 'Memphis', state: 'Tennessee', stateSlug: 'tennessee', abbr: 'TN', emoji: '🎵',
-    desc: 'Memphis knows how to celebrate. Add a live hibachi chef show to your next backyard party with Everlasting Hibachi, serving Memphis and surrounding areas.',
-    nearby: ['Germantown', 'Bartlett', 'Collierville', 'Cordova', 'Millington', 'Arlington', 'Southaven MS'] },
-  { slug: 'knoxville-hibachi-at-home', name: 'Knoxville', state: 'Tennessee', stateSlug: 'tennessee', abbr: 'TN', emoji: '🏔️',
-    desc: 'Gateway to the Smoky Mountains, Knoxville is perfect for outdoor entertaining. Everlasting Hibachi brings the chef and grill directly to your Knoxville backyard.',
-    nearby: ['Maryville', 'Oak Ridge', 'Alcoa', 'Farragut', 'Powell', 'Lenoir City', 'Sevierville'] },
-  { slug: 'chattanooga-hibachi-at-home', name: 'Chattanooga', state: 'Tennessee', stateSlug: 'tennessee', abbr: 'TN', emoji: '⚓',
-    desc: 'Chattanooga\'s outdoor culture is a perfect match for our outdoor hibachi show. Book a private chef for your next backyard party in the Chattanooga area.',
-    nearby: ['East Ridge', 'Hixson', 'Soddy-Daisy', 'Cleveland TN', 'Red Bank', 'Signal Mountain', 'Fort Oglethorpe GA'] },
-  { slug: 'birmingham-hibachi-at-home', name: 'Birmingham', state: 'Alabama', stateSlug: 'alabama', abbr: 'AL', emoji: '⚒️',
-    desc: 'Birmingham is the largest city in Alabama and a hub for backyard entertaining. Everlasting Hibachi brings the outdoor fire show directly to your Birmingham home.',
-    nearby: ['Hoover', 'Vestavia Hills', 'Mountain Brook', 'Homewood', 'Pelham', 'Alabaster', 'Trussville'] },
-  { slug: 'huntsville-hibachi-at-home', name: 'Huntsville', state: 'Alabama', stateSlug: 'alabama', abbr: 'AL', emoji: '🚀',
-    desc: 'Huntsville — Rocket City — is growing fast, and so is the demand for unique backyard experiences. Book Everlasting Hibachi for your Huntsville party.',
-    nearby: ['Madison', 'Decatur', 'Athens AL', 'Hampton Cove', 'Owens Cross Roads', 'New Market', 'Meridianville'] },
-  { slug: 'montgomery-hibachi-at-home', name: 'Montgomery', state: 'Alabama', stateSlug: 'alabama', abbr: 'AL', emoji: '🏛️',
-    desc: 'Montgomery, Alabama\'s capital city, deserves a celebration worth remembering. Everlasting Hibachi brings the private chef and fire show to your backyard.',
-    nearby: ['Prattville', 'Millbrook', 'Pike Road', 'Wetumpka', 'Elmore', 'Hope Hull'] },
-  { slug: 'charlotte-hibachi-at-home', name: 'Charlotte', state: 'North Carolina', stateSlug: 'north-carolina', abbr: 'NC', emoji: '🏦',
-    desc: 'Charlotte is the largest city in the Carolinas and a prime destination for unique backyard parties. Everlasting Hibachi serves Charlotte and the greater metro.',
-    nearby: ['Concord', 'Gastonia', 'Huntersville', 'Matthews', 'Kannapolis', 'Mooresville', 'Cornelius', 'Rock Hill SC'] },
-  { slug: 'raleigh-hibachi-at-home', name: 'Raleigh', state: 'North Carolina', stateSlug: 'north-carolina', abbr: 'NC', emoji: '🌳',
-    desc: 'Raleigh and the Research Triangle are home to thousands of young families who love hosting backyard parties. Everlasting Hibachi brings the chef show to you.',
-    nearby: ['Durham', 'Cary', 'Chapel Hill', 'Apex', 'Morrisville', 'Wake Forest', 'Garner'] },
-  { slug: 'charleston-hibachi-at-home', name: 'Charleston', state: 'South Carolina', stateSlug: 'south-carolina', abbr: 'SC', emoji: '⚓',
-    desc: 'Historic Charleston and its gorgeous coastal surroundings are perfect for an outdoor hibachi show. Everlasting Hibachi brings the experience to your property.',
-    nearby: ['Mount Pleasant', 'North Charleston', 'Summerville', 'Goose Creek', 'Hanahan', 'Isle of Palms', 'Sullivan\'s Island'] },
-  { slug: 'columbia-hibachi-at-home', name: 'Columbia', state: 'South Carolina', stateSlug: 'south-carolina', abbr: 'SC', emoji: '🌆',
-    desc: 'Columbia, South Carolina\'s capital and home to the University of South Carolina, is a great place to host a backyard hibachi party with Everlasting Hibachi.',
-    nearby: ['Lexington', 'Irmo', 'Cayce', 'West Columbia', 'Chapin', 'Blythewood', 'Forest Acres'] },
-];
+// City pages removed — only state-level pages are used.
 
 function bookingFormHTML(locationLabel) {
   return `
@@ -374,26 +336,18 @@ ${NAV}
   </div>
 </div>
 
-<!-- Cities -->
+<!-- Cities We Serve (text only) -->
 <section class="section" style="background:#fff">
   <div class="container">
     <div class="text-center">
       <div class="section-label reveal">Cities We Serve</div>
-      <h2 class="section-title reveal">Hibachi Delivery Across <em>${s.name}</em></h2>
-      <p class="section-desc reveal">Find your city below. Don't see yours? Call us — we may still be able to travel to your location.</p>
+      <h2 class="section-title reveal">Serving All of <em>${s.name}</em></h2>
+      <p class="section-desc reveal">We travel across ${s.name} for private hibachi events. Don't see your city? Contact us — we may still be able to come to you.</p>
     </div>
-    <div class="areas-grid reveal" style="margin-top:3rem">
-      ${s.cityLinks.map((c, i) => `<div class="area-card">
-        <div class="area-state">${s.name}</div>
-        <h3>${c.name} Hibachi at Home</h3>
-        <p class="area-cities">Private hibachi chef for backyard parties in ${c.name} and surrounding communities.</p>
-        <a href="/${c.slug}/" class="area-link">View ${c.name} Page</a>
-      </div>`).join('\n      ')}
-      <div class="area-card" style="background:var(--primary-bg);border-color:rgba(234,88,12,0.2)">
-        <div class="area-state" style="color:var(--primary)">Don't See Your City?</div>
-        <h3>We May Still Serve You</h3>
-        <p class="area-cities">Contact us with your ZIP code, date, and guest count. We'll confirm availability in your area.</p>
-        <a href="/contact/" class="area-link">Ask About Your Location</a>
+    <div class="reveal" style="margin-top:2.5rem;text-align:center">
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem">
+        ${s.cities.map(city => `<span style="padding:0.55rem 1.25rem;background:var(--bg-warm);border:1.5px solid var(--border-warm);border-radius:999px;font-size:0.9rem;font-weight:600;color:var(--text-2)">${city}</span>`).join('\n        ')}
+        <span style="padding:0.55rem 1.25rem;background:var(--primary-bg);border:1.5px solid rgba(234,88,12,0.2);border-radius:999px;font-size:0.9rem;font-weight:600;color:var(--primary-lt)">+ more areas</span>
       </div>
     </div>
   </div>
@@ -657,12 +611,4 @@ for (const s of states) {
   console.log(`✓ State: /${s.slug}/`);
 }
 
-// Generate city pages
-for (const c of cities) {
-  const dir = join(BASE, c.slug);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), makePage('city', c));
-  console.log(`✓ City: /${c.slug}/`);
-}
-
-console.log('\n✅ All location pages generated!');
+console.log('\n✅ All state pages generated!');
