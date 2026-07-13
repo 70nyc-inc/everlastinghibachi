@@ -368,6 +368,8 @@ ${NAV}
   </div>
 </section>
 
+${bookingFormHTML(s.name)}
+
 <!-- Pricing -->
 <section class="section" style="background:#fff">
   <div class="container">
@@ -422,8 +424,6 @@ ${NAV}
     </div>
   </div>
 </section>
-
-${bookingFormHTML(s.name)}
 
 <section class="cta-section">
   <div class="container">
