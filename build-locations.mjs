@@ -62,7 +62,7 @@ const FOOTER = `<footer>
     <div class="footer-bottom">
       <p>© 2026 Everlasting Hibachi. All rights reserved.</p>
       <p>Serving GA · TN · AL · NC · SC</p>
-      <p style="font-size:0.75rem;opacity:0.5">Design by <a href="https://70nyc.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">70nyc</a></p>
+      <p style="font-size:0.75rem;opacity:0.5">Design by <a href="https://70nyc.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">70NYC</a></p>
     </div>
   </div>
 </footer>
