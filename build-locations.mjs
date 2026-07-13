@@ -233,24 +233,6 @@ function bookingFormHTML(locationLabel) {
           </div>
           <div class="bf-group"><label>Children Under 4 (FREE)</label><input type="number" name="children_under_4" placeholder="e.g. 1" min="0" value="0"></div>
 
-          <div class="bf-section-title">Food Order</div>
-          <div class="bf-group">
-            <label>Food Order (2 proteins per adult) <span>*</span>
-              <small style="display:block;font-weight:400;color:var(--text-muted);margin-top:0.2rem">Proteins: Chicken · Steak · Shrimp · Salmon · Tofu · Scallop · Filet Mignon (+$5) · Lobster (+$10). Type <strong>"TBD"</strong> to confirm closer to event.</small>
-            </label>
-            <textarea name="food_order" placeholder="e.g. 10 adults: 6 chicken, 4 steak, 4 shrimp, 6 salmon&#10;&#10;— OR type TBD to confirm later" required></textarea>
-          </div>
-          <div class="bf-group"><label>Food Allergies or Dietary Restrictions <span>*</span> <small style="font-weight:400;color:var(--text-muted)">(Gluten-free &amp; HALAL available)</small></label><textarea name="allergies" placeholder="List any food allergies. Type 'None' if none." style="min-height:70px" required></textarea></div>
-
-          <div class="bf-section-title">Add-Ons &amp; Other Info</div>
-          <div class="bf-group">
-            <label>Appetizers &amp; Add-Ons</label>
-            <div style="display:flex;flex-wrap:wrap;gap:0.6rem">
-              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" name="addon_gyoza" value="Gyoza (6 pcs) $8"> Gyoza (6 pcs) — $8</label>
-              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" name="addon_edamame" value="Edamame $7"> Edamame — $7</label>
-              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" name="addon_noodles" value="Noodles $5"> Noodles — $5</label>
-            </div>
-          </div>
           <div class="bf-group"><label>Special Requests or Notes</label><textarea name="special_requests" placeholder="Any special setup requests, theme, or notes..." style="min-height:70px"></textarea></div>
           <div class="bf-group"><label>How Did You Hear About Us? <span>*</span></label>
             <select name="referral_source" required>
