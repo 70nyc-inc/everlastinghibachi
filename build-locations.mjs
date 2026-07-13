@@ -320,7 +320,7 @@ ${NAV}
       <span>›</span>
       <span>${s.name}</span>
     </div>
-    <div class="hero-badge" style="margin-bottom:1.25rem">${s.emoji} ${s.name} · Private Hibachi Chef</div>
+    <div class="hero-badge" style="margin-bottom:1.25rem">${s.name} · Private Hibachi Chef</div>
     <h1>Hibachi at Home <em>${s.name}</em></h1>
     <p class="hero-desc">${s.desc} We bring the chef, grill, fresh ingredients, and live fire show directly to your home. Serving <strong>${allCities}</strong>.</p>
     <div class="hero-actions" style="margin-top:2rem">
