@@ -402,7 +402,7 @@ ${bookingFormHTML(s.name)}
     <div class="faq-list reveal" style="margin-top:3rem">
       <div class="faq-item"><button class="faq-question">Do you serve all of ${s.name}?<span class="faq-icon">+</span></button><div class="faq-answer">Yes! We serve ${allCities} and surrounding communities. Contact us with your location for confirmation.</div></div>
       <div class="faq-item"><button class="faq-question">What is the minimum for a ${s.name} event?<span class="faq-icon">+</span></button><div class="faq-answer">All events have a $550 minimum spend. Pricing is $55 per adult and $30 per child (ages 5–13). Children under 4 are always free.</div></div>
-      <div class="faq-item"><button class="faq-question">What proteins are available in ${s.name}?<span class="faq-icon">+</span></button><div class="faq-answer">Choose 2 proteins per adult from: Chicken, Steak, Shrimp, Scallop, Salmon, Tofu. Upgrades: Filet Mignon (+$5), Lobster Tail (+$10).</div></div>
+      <div class="faq-item"><button class="faq-question">What proteins are available in ${s.name}?<span class="faq-icon">+</span></button><div class="faq-answer">Choose 2 proteins per adult · 2 per child from: Chicken, Steak, Shrimp, Scallop, Salmon, Tofu. Upgrades: Filet Mignon (+$5), Lobster Tail (+$10).</div></div>
       <div class="faq-item"><button class="faq-question">How far in advance should I book?<span class="faq-icon">+</span></button><div class="faq-answer">We recommend booking as early as possible to secure your preferred date. A 20–30% deposit confirms your booking, and final headcount is due 5–10 days before your event.</div></div>
     </div>
   </div>
