@@ -197,6 +197,43 @@
             <input type="number" name="children_under_4" placeholder="e.g. 1" min="0" value="0">
           </div>
 
+          <!-- Food Order -->
+          <div class="bf-section-title">Food Order</div>
+
+          <div class="bf-group">
+            <label>
+              Food Order (2 proteins per adult · 2 per child) <span>*</span>
+              <small style="display:block;font-weight:400;color:var(--text-muted);margin-top:0.2rem">
+                Proteins: Chicken · Steak · Shrimp · Salmon · Tofu · Scallop · Filet Mignon (+$5) · Lobster (+$10)<br>
+                Type <strong>"TBD"</strong> if you'd like to confirm later (due 5–10 days before event).
+              </small>
+            </label>
+            <textarea name="food_order" placeholder="e.g. 10 adults: 6 chicken, 4 steak, 4 shrimp, 6 salmon&#10;5 kids: 5 chicken&#10;&#10;— OR type TBD to confirm later" required></textarea>
+          </div>
+
+          <div class="bf-group">
+            <label>Food Allergies or Dietary Restrictions <span>*</span> <small style="font-weight:400;color:var(--text-muted)">(Gluten-free & HALAL available)</small></label>
+            <textarea name="allergies" placeholder="List any food allergies or dietary restrictions. Type 'None' if none." style="min-height:70px" required></textarea>
+          </div>
+
+          <!-- Add-Ons -->
+          <div class="bf-section-title">Add-Ons & Other Info</div>
+
+          <div class="bf-group">
+            <label>Appetizers & Add-Ons</label>
+            <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:0.5rem">
+              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer">
+                <input type="checkbox" name="addon_gyoza" value="Gyoza (6 pcs) $8"> Gyoza (6 pcs) — $8
+              </label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer">
+                <input type="checkbox" name="addon_edamame" value="Edamame $7"> Edamame — $7
+              </label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer">
+                <input type="checkbox" name="addon_noodles" value="Noodles $5"> Noodles — $5
+              </label>
+            </div>
+          </div>
+
           <!-- Additional Info -->
           <div class="bf-section-title">Additional Information</div>
 
