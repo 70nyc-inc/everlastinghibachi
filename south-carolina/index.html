@@ -203,12 +203,13 @@
             </div>
             <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;line-height:1.5">* Estimate only &amp;middot; Gratuity &amp; travel fee not included &amp;middot; Deposit 20–30% required.</div>
           </div>
+          <input type="hidden" name="estimated_total" id="estimated_total_input" value="">
           <script>
           function updateQuote(){
             var a=parseInt(document.getElementById('calc_adults').value)||0;
             var c=parseInt(document.getElementById('calc_children').value)||0;
             var el=document.getElementById('price-estimate');
-            if(a===0&&c===0){el.style.display='none';return;}
+            if(a===0&&c===0){el.style.display='none';document.getElementById('estimated_total_input').value='';return;}
             var t=(a*55)+(c*30),min=550,f=Math.max(t,min);
             var b='';
             if(a>0) b+='<span>'+a+' adult'+(a>1?'s':'')+' × $55 = <strong>$'+(a*55)+'</strong></span>';
@@ -217,6 +218,10 @@
             document.getElementById('price-total').textContent='$'+f.toLocaleString();
             document.getElementById('price-note').textContent=t<min?'($550 minimum applies)':'estimated total';
             el.style.display='block';
+            var summary='Estimated: $'+f.toLocaleString()+(t<min?' (minimum applied)':'');
+            if(a>0) summary+=' | Adults: '+a+' × $55 = $'+(a*55);
+            if(c>0) summary+=' | Children: '+c+' × $30 = $'+(c*30);
+            document.getElementById('estimated_total_input').value=summary;
           }
           </script>
 
