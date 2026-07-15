@@ -229,10 +229,37 @@ function bookingFormHTML(locationLabel) {
 
           <div class="bf-section-title">Guest Count</div>
           <div class="bf-row">
-            <div class="bf-group"><label>Number of Adults (14+) <span>*</span></label><input type="number" name="adults" placeholder="e.g. 10" min="0" required></div>
-            <div class="bf-group"><label>Number of Children (5–13)</label><input type="number" name="children" placeholder="e.g. 3" min="0" value="0"></div>
+            <div class="bf-group"><label>Number of Adults (14+) <span>*</span></label><input type="number" id="calc_adults" name="adults" placeholder="e.g. 10" min="0" required oninput="updateQuote()"></div>
+            <div class="bf-group"><label>Number of Children (5–13)</label><input type="number" id="calc_children" name="children" placeholder="e.g. 3" min="0" value="0" oninput="updateQuote()"></div>
           </div>
           <div class="bf-group"><label>Children Under 4 (FREE)</label><input type="number" name="children_under_4" placeholder="e.g. 1" min="0" value="0"></div>
+
+          <!-- Price Estimate -->
+          <div id="price-estimate" style="display:none;background:linear-gradient(135deg,var(--primary-bg),#fff8f2);border:2px solid var(--primary-lt);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem">
+            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary-lt);margin-bottom:0.75rem">Estimated Quote</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem 2rem;margin-bottom:0.75rem;font-size:0.9rem;color:var(--text-muted)" id="price-breakdown"></div>
+            <div style="display:flex;align-items:baseline;gap:0.75rem;flex-wrap:wrap">
+              <div style="font-family:var(--font-head);font-size:2rem;font-weight:900;color:var(--primary-lt)" id="price-total"></div>
+              <div style="font-size:0.82rem;color:var(--text-muted)" id="price-note"></div>
+            </div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;line-height:1.5">* Estimate only &amp;middot; Gratuity &amp; travel fee not included &amp;middot; Deposit 20–30% required.</div>
+          </div>
+          <script>
+          function updateQuote(){
+            var a=parseInt(document.getElementById('calc_adults').value)||0;
+            var c=parseInt(document.getElementById('calc_children').value)||0;
+            var el=document.getElementById('price-estimate');
+            if(a===0&&c===0){el.style.display='none';return;}
+            var t=(a*55)+(c*30),min=550,f=Math.max(t,min);
+            var b='';
+            if(a>0) b+='<span>'+a+' adult'+(a>1?'s':'')+' × $55 = <strong>$'+(a*55)+'</strong></span>';
+            if(c>0) b+='<span>'+c+' child'+(c>1?'ren':'')+' × $30 = <strong>$'+(c*30)+'</strong></span>';
+            document.getElementById('price-breakdown').innerHTML=b;
+            document.getElementById('price-total').textContent='$'+f.toLocaleString();
+            document.getElementById('price-note').textContent=t<min?'($550 minimum applies)':'estimated total';
+            el.style.display='block';
+          }
+          </script>
 
           <div class="bf-section-title">Food Order</div>
           <div class="bf-group">
