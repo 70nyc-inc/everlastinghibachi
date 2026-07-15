@@ -251,16 +251,16 @@
           <div class="bf-section-title">Add-Ons &amp; Other Info</div>
           <div class="bf-group">
             <label>Appetizers &amp; Add-Ons</label>
-            <div style="display:flex;flex-wrap:wrap;gap:0.6rem">
-              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" id="ao_gyoza" name="addon_gyoza" value="Gyoza (6 pcs) $8" onchange="updateQuote()"> Gyoza (6 pcs) — $8</label>
-              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" id="ao_edamame" name="addon_edamame" value="Edamame $7" onchange="updateQuote()"> Edamame — $7</label>
-              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" id="ao_noodles" name="addon_noodles" value="Noodles $5" onchange="updateQuote()"> Noodles — $5</label>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer"><input type="checkbox" id="ao_gyoza" name="addon_gyoza" value="Gyoza (6 pcs) $8" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px"> Gyoza (6 pcs) — $8</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer"><input type="checkbox" id="ao_edamame" name="addon_edamame" value="Edamame $7" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px"> Edamame — $7</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer"><input type="checkbox" id="ao_noodles" name="addon_noodles" value="Noodles $5" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px"> Noodles — $5</label>
             </div>
           </div>
           <div class="bf-group">
-            <label style="display:flex;align-items:flex-start;gap:0.6rem;font-weight:400;font-size:0.9rem;cursor:pointer;line-height:1.5">
-              <input type="checkbox" id="travel_fee" name="travel_fee" value="Travel fee +$100" onchange="updateQuote()" style="margin-top:0.2rem;flex-shrink:0">
-              <span><strong>Travel Fee:</strong> My event is outside the Atlanta metro area — add $100 travel fee</span>
+            <label style="display:flex;align-items:flex-start;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer;line-height:1.5;width:100%">
+              <input type="checkbox" id="travel_fee" name="travel_fee" value="Travel fee +$100" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px;margin-top:0.2rem">
+              <span style="flex:1;min-width:0"><strong>Travel Fee (+$100):</strong> My event is outside the Atlanta metro area</span>
             </label>
           </div>
           <div class="bf-group"><label>Special Requests or Notes</label><textarea name="special_requests" placeholder="Any special setup requests, theme, or notes..." style="min-height:70px"></textarea></div>
