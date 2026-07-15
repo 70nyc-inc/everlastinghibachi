@@ -211,17 +211,30 @@
             var c=parseInt(document.getElementById('calc_children').value)||0;
             var el=document.getElementById('price-estimate');
             if(a===0&&c===0){el.style.display='none';document.getElementById('estimated_total_input').value='';return;}
-            var t=(a*55)+(c*30),min=550,f=Math.max(t,min);
+            var food=(a*55)+(c*30),min=550,foodFinal=Math.max(food,min);
+            var addons=0,addonLines=[];
+            if(document.getElementById('ao_gyoza')&&document.getElementById('ao_gyoza').checked){addons+=8;addonLines.push('Gyoza $8');}
+            if(document.getElementById('ao_edamame')&&document.getElementById('ao_edamame').checked){addons+=7;addonLines.push('Edamame $7');}
+            if(document.getElementById('ao_noodles')&&document.getElementById('ao_noodles').checked){addons+=5;addonLines.push('Noodles $5');}
+            var travel=0;
+            if(document.getElementById('travel_fee')&&document.getElementById('travel_fee').checked){travel=100;}
+            var grand=foodFinal+addons+travel;
             var b='';
             if(a>0) b+='<span>'+a+' adult'+(a>1?'s':'')+' × $55 = <strong>$'+(a*55)+'</strong></span>';
             if(c>0) b+='<span>'+c+' child'+(c>1?'ren':'')+' × $30 = <strong>$'+(c*30)+'</strong></span>';
+            if(food<min) b+='<span>Min. <strong>$'+min+'</strong></span>';
+            if(addonLines.length>0) b+='<span>Add-ons: <strong>+$'+addons+'</strong></span>';
+            if(travel>0) b+='<span>Travel fee: <strong>+$100</strong></span>';
             document.getElementById('price-breakdown').innerHTML=b;
-            document.getElementById('price-total').textContent='$'+f.toLocaleString();
-            document.getElementById('price-note').textContent=t<min?'($550 minimum applies)':'estimated total';
+            document.getElementById('price-total').textContent='$'+grand.toLocaleString();
+            document.getElementById('price-note').textContent='estimated total';
             el.style.display='block';
-            var summary='Estimated: $'+f.toLocaleString()+(t<min?' (minimum applied)':'');
+            var summary='Estimated Total: $'+grand;
             if(a>0) summary+=' | Adults: '+a+' × $55 = $'+(a*55);
             if(c>0) summary+=' | Children: '+c+' × $30 = $'+(c*30);
+            if(food<min) summary+=' | $550 minimum applied';
+            if(addonLines.length>0) summary+=' | Add-ons: '+addonLines.join(', ')+' = $'+addons;
+            if(travel>0) summary+=' | Travel fee: $100';
             document.getElementById('estimated_total_input').value=summary;
           }
           </script>
@@ -239,10 +252,17 @@
           <div class="bf-group">
             <label>Appetizers &amp; Add-Ons</label>
             <div style="display:flex;flex-wrap:wrap;gap:0.6rem">
-              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" name="addon_gyoza" value="Gyoza (6 pcs) $8"> Gyoza (6 pcs) — $8</label>
-              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" name="addon_edamame" value="Edamame $7"> Edamame — $7</label>
-              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" name="addon_noodles" value="Noodles $5"> Noodles — $5</label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" id="ao_gyoza" name="addon_gyoza" value="Gyoza (6 pcs) $8" onchange="updateQuote()"> Gyoza (6 pcs) — $8</label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" id="ao_edamame" name="addon_edamame" value="Edamame $7" onchange="updateQuote()"> Edamame — $7</label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.9rem;cursor:pointer"><input type="checkbox" id="ao_noodles" name="addon_noodles" value="Noodles $5" onchange="updateQuote()"> Noodles — $5</label>
             </div>
+          </div>
+          <div class="bf-group">
+            <label>Travel Fee</label>
+            <label style="display:flex;align-items:flex-start;gap:0.6rem;font-weight:400;font-size:0.9rem;cursor:pointer;line-height:1.5">
+              <input type="checkbox" id="travel_fee" name="travel_fee" value="Travel fee +$100" onchange="updateQuote()" style="margin-top:0.2rem;flex-shrink:0">
+              <span>My event is <strong>outside the Atlanta metro area</strong> — add $100 travel fee</span>
+            </label>
           </div>
           <div class="bf-group"><label>Special Requests or Notes</label><textarea name="special_requests" placeholder="Any special setup requests, theme, or notes..." style="min-height:70px"></textarea></div>
           <div class="bf-group"><label>How Did You Hear About Us? <span>*</span></label>
