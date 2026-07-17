@@ -141,6 +141,12 @@
         <p>🍗 <strong>Protein Choices</strong> — 2 per adult · 2 per child: Chicken · Steak · Shrimp · Salmon · Tofu · Scallop &nbsp;·&nbsp; Upgrades: Filet Mignon +$5 · Lobster +$10</p>
       </div>
       <div class="bf-body">
+        <!-- Step indicator -->
+        <div id="step-indicator" style="display:flex;gap:0;margin-bottom:1.5rem;border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--primary-lt)">
+          <div id="step-tab-1" style="flex:1;text-align:center;padding:0.6rem 0.5rem;font-size:0.82rem;font-weight:700;background:var(--primary);color:#fff;transition:all .2s">Step 1 · Your Info &amp; Quote</div>
+          <div id="step-tab-2" style="flex:1;text-align:center;padding:0.6rem 0.5rem;font-size:0.82rem;font-weight:700;background:#fff;color:var(--text-muted);transition:all .2s">Step 2 · Food &amp; Details</div>
+        </div>
+
         <form action="https://api.web3forms.com/submit" method="POST" onsubmit="updateQuote()">
           <input type="hidden" name="access_key" value="bd4a4810-7d3c-4c8b-8e0d-a338bae94cf8">
           <input type="hidden" name="subject" value="🔥 New Hibachi Booking — Alabama — Everlasting Hibachi">
@@ -149,143 +155,175 @@
           <input type="hidden" name="location_page" value="Alabama">
           <input type="checkbox" name="botcheck" style="display:none">
 
-          <div class="bf-section-title">Contact Information</div>
-          <div class="bf-row">
-            <div class="bf-group"><label>First Name <span>*</span></label><input type="text" name="first_name" placeholder="First name" required></div>
-            <div class="bf-group"><label>Last Name <span>*</span></label><input type="text" name="last_name" placeholder="Last name" required></div>
-          </div>
-          <div class="bf-group">
-            <label>Cell Phone <span>*</span></label>
-            <div class="bf-phone-row"><span class="bf-phone-prefix">🇺🇸 +1</span><input type="tel" name="phone" placeholder="(XXX) XXX-XXXX" required></div>
-          </div>
-          <div class="bf-group"><label>Email Address <span>*</span></label><input type="email" name="email" placeholder="your@email.com" required></div>
+          <!-- STEP 1 -->
+          <div id="form-step-1">
+            <div class="bf-section-title">Contact Information</div>
+            <div class="bf-row">
+              <div class="bf-group"><label>First Name <span>*</span></label><input type="text" name="first_name" placeholder="First name" required></div>
+              <div class="bf-group"><label>Last Name <span>*</span></label><input type="text" name="last_name" placeholder="Last name" required></div>
+            </div>
+            <div class="bf-group">
+              <label>Cell Phone <span>*</span></label>
+              <div class="bf-phone-row"><span class="bf-phone-prefix">🇺🇸 +1</span><input type="tel" name="phone" placeholder="(XXX) XXX-XXXX" required></div>
+            </div>
+            <div class="bf-group"><label>Email Address <span>*</span></label><input type="email" name="email" placeholder="your@email.com" required></div>
 
-          <div class="bf-section-title">Event Details</div>
-          <div class="bf-row">
-            <div class="bf-group"><label>Event Date <span>*</span></label><input type="date" name="event_date" required></div>
-            <div class="bf-group"><label>Start Time <span>*</span></label>
-              <select name="start_time" required>
-                <option value="">Select a time...</option>
-                <option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option>
-                <option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
-                <option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option>
+            <div class="bf-section-title">Event Details</div>
+            <div class="bf-row">
+              <div class="bf-group"><label>Event Date <span>*</span></label><input type="date" name="event_date" required></div>
+              <div class="bf-group"><label>Start Time <span>*</span></label>
+                <select name="start_time" required>
+                  <option value="">Select a time...</option>
+                  <option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option>
+                  <option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
+                  <option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="bf-section-title">Event Location</div>
+            <div class="bf-group"><label>Full Party Address <span>*</span> <small style="font-weight:400;color:var(--text-muted)">(House #, Street, Town, ZIP)</small></label><input type="text" name="address" placeholder="e.g. 123 Main St, Alabama 30301" required></div>
+
+            <div class="bf-section-title">Guest Count</div>
+            <div class="bf-row">
+              <div class="bf-group"><label>Adults (14+) <span>*</span></label><input type="number" id="calc_adults" name="adults" placeholder="e.g. 10" min="0" required oninput="updateQuote()"></div>
+              <div class="bf-group"><label>Children (5–13)</label><input type="number" id="calc_children" name="children" placeholder="e.g. 3" min="0" value="0" oninput="updateQuote()"></div>
+            </div>
+            <div class="bf-group"><label>Under 4 (FREE)</label><input type="number" name="children_under_4" placeholder="e.g. 1" min="0" value="0"></div>
+
+            <div id="price-estimate" style="display:none;background:linear-gradient(135deg,var(--primary-bg),#fff8f2);border:2px solid var(--primary-lt);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem">
+              <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary-lt);margin-bottom:0.75rem">Estimated Quote</div>
+              <div style="display:flex;flex-wrap:wrap;gap:0.5rem 2rem;margin-bottom:0.75rem;font-size:0.9rem;color:var(--text-muted)" id="price-breakdown"></div>
+              <div style="display:flex;align-items:baseline;gap:0.75rem;flex-wrap:wrap">
+                <div style="font-family:var(--font-head);font-size:2rem;font-weight:900;color:var(--primary-lt)" id="price-total"></div>
+                <div style="font-size:0.82rem;color:var(--text-muted)" id="price-note"></div>
+              </div>
+              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;line-height:1.5">* Estimate only · Gratuity not included · Deposit 20–30% required.</div>
+            </div>
+            <input type="hidden" name="estimated_total" id="estimated_total_input" value="Not calculated (guest count not entered)">
+            <script>
+            function updateQuote(){
+              var a=parseInt(document.getElementById('calc_adults').value)||0;
+              var c=parseInt(document.getElementById('calc_children').value)||0;
+              var el=document.getElementById('price-estimate');
+              if(a===0&&c===0){el.style.display='none';return;}
+              var food=(a*55)+(c*30),min=550,foodFinal=Math.max(food,min);
+              var addons=0,addonLines=[];
+              if(document.getElementById('ao_gyoza')&&document.getElementById('ao_gyoza').checked){addons+=8;addonLines.push('Gyoza $8');}
+              if(document.getElementById('ao_edamame')&&document.getElementById('ao_edamame').checked){addons+=7;addonLines.push('Edamame $7');}
+              if(document.getElementById('ao_noodles')&&document.getElementById('ao_noodles').checked){addons+=5;addonLines.push('Noodles $5');}
+              var travel=0;
+              if(document.getElementById('travel_fee')&&document.getElementById('travel_fee').checked){travel=100;}
+              var grand=foodFinal+addons+travel;
+              var b='';
+              if(a>0) b+='<span>'+a+' adult'+(a>1?'s':'')+' × $55 = <strong>$'+(a*55)+'</strong></span>';
+              if(c>0) b+='<span>'+c+' child'+(c>1?'ren':'')+' × $30 = <strong>$'+(c*30)+'</strong></span>';
+              if(food<min) b+='<span>Min. <strong>$'+min+'</strong></span>';
+              if(addonLines.length>0) b+='<span>Add-ons: <strong>+$'+addons+'</strong></span>';
+              if(travel>0) b+='<span>Travel fee: <strong>+$100</strong></span>';
+              document.getElementById('price-breakdown').innerHTML=b;
+              document.getElementById('price-total').textContent='$'+grand.toLocaleString();
+              document.getElementById('price-note').textContent='estimated total';
+              el.style.display='block';
+              var summary='Estimated Total: $'+grand;
+              if(a>0) summary+=' | Adults: '+a+' × $55 = $'+(a*55);
+              if(c>0) summary+=' | Children: '+c+' × $30 = $'+(c*30);
+              if(food<min) summary+=' | $550 minimum applied';
+              if(addonLines.length>0) summary+=' | Add-ons: '+addonLines.join(', ')+' = $'+addons;
+              if(travel>0) summary+=' | Travel fee: $100';
+              document.getElementById('estimated_total_input').value=summary;
+            }
+            function goStep2(){
+              var s1=document.getElementById('form-step-1');
+              var inputs=s1.querySelectorAll('input[required],select[required]');
+              for(var i=0;i<inputs.length;i++){if(!inputs[i].value.trim()){inputs[i].focus();inputs[i].reportValidity();return;}}
+              updateQuote();
+              s1.style.display='none';
+              document.getElementById('form-step-2').style.display='block';
+              document.getElementById('step-tab-1').style.background='#e8e8e8';
+              document.getElementById('step-tab-1').style.color='var(--text-muted)';
+              document.getElementById('step-tab-2').style.background='var(--primary)';
+              document.getElementById('step-tab-2').style.color='#fff';
+              window.scrollTo({top:document.getElementById('step-indicator').offsetTop-80,behavior:'smooth'});
+            }
+            function goStep1(){
+              document.getElementById('form-step-2').style.display='none';
+              document.getElementById('form-step-1').style.display='block';
+              document.getElementById('step-tab-1').style.background='var(--primary)';
+              document.getElementById('step-tab-1').style.color='#fff';
+              document.getElementById('step-tab-2').style.background='#fff';
+              document.getElementById('step-tab-2').style.color='var(--text-muted)';
+              window.scrollTo({top:document.getElementById('step-indicator').offsetTop-80,behavior:'smooth'});
+            }
+            </script>
+
+            <button type="button" onclick="goStep2()" class="bf-submit" style="margin-top:0.5rem">Next: Food &amp; Details →</button>
+            <p class="bf-note">Step 1 of 2 · No commitment until deposit is paid</p>
+          </div><!-- /form-step-1 -->
+
+          <!-- STEP 2 -->
+          <div id="form-step-2" style="display:none">
+            <div class="bf-section-title">Event Details</div>
+            <div class="bf-group"><label>Type of Event / Occasion <span>*</span></label>
+              <select name="occasion" required>
+                <option value="">Select occasion...</option>
+                <option>Birthday Party</option><option>Wedding / Rehearsal Dinner</option><option>Anniversary</option>
+                <option>Graduation Party</option><option>Bachelorette / Bachelor Party</option>
+                <option>Corporate Event / Team Dinner</option><option>Family Reunion</option>
+                <option>Vacation Rental / Airbnb</option><option>Holiday Celebration</option><option>Other</option>
               </select>
             </div>
-          </div>
-          <div class="bf-group"><label>Type of Event / Occasion <span>*</span></label>
-            <select name="occasion" required>
-              <option value="">Select occasion...</option>
-              <option>Birthday Party</option><option>Wedding / Rehearsal Dinner</option><option>Anniversary</option>
-              <option>Graduation Party</option><option>Bachelorette / Bachelor Party</option>
-              <option>Corporate Event / Team Dinner</option><option>Family Reunion</option>
-              <option>Vacation Rental / Airbnb</option><option>Holiday Celebration</option><option>Other</option>
-            </select>
-          </div>
-          <div class="bf-group"><label>Guest of Honor (if applicable)</label><input type="text" name="guest_of_honor" placeholder="e.g. Sarah's 30th Birthday"></div>
+            <div class="bf-group"><label>Guest of Honor <small style="font-weight:400;color:var(--text-muted)">(optional)</small></label><input type="text" name="guest_of_honor" placeholder="e.g. Sarah's 30th Birthday"></div>
 
-          <div class="bf-section-title">Event Location</div>
-          <div class="bf-group"><label>Full Party Address <span>*</span> <small style="font-weight:400;color:var(--text-muted)">(House #, Street, Town, ZIP required)</small></label><input type="text" name="address" placeholder="e.g. 123 Main St, Alabama 30301" required></div>
-
-          <div class="bf-section-title">Guest Count</div>
-          <div class="bf-row">
-            <div class="bf-group"><label>Number of Adults (14+) <span>*</span></label><input type="number" id="calc_adults" name="adults" placeholder="e.g. 10" min="0" required oninput="updateQuote()"></div>
-            <div class="bf-group"><label>Number of Children (5–13)</label><input type="number" id="calc_children" name="children" placeholder="e.g. 3" min="0" value="0" oninput="updateQuote()"></div>
-          </div>
-          <div class="bf-group"><label>Children Under 4 (FREE)</label><input type="number" name="children_under_4" placeholder="e.g. 1" min="0" value="0"></div>
-
-          <!-- Price Estimate -->
-          <div id="price-estimate" style="display:none;background:linear-gradient(135deg,var(--primary-bg),#fff8f2);border:2px solid var(--primary-lt);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem">
-            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary-lt);margin-bottom:0.75rem">Estimated Quote</div>
-            <div style="display:flex;flex-wrap:wrap;gap:0.5rem 2rem;margin-bottom:0.75rem;font-size:0.9rem;color:var(--text-muted)" id="price-breakdown"></div>
-            <div style="display:flex;align-items:baseline;gap:0.75rem;flex-wrap:wrap">
-              <div style="font-family:var(--font-head);font-size:2rem;font-weight:900;color:var(--primary-lt)" id="price-total"></div>
-              <div style="font-size:0.82rem;color:var(--text-muted)" id="price-note"></div>
+            <div class="bf-section-title">Food Order</div>
+            <div class="bf-group">
+              <label>Protein Selection (2 per adult · 2 per child) <span>*</span>
+                <small style="display:block;font-weight:400;color:var(--text-muted);margin-top:0.2rem">Chicken · Steak · Shrimp · Salmon · Tofu · Scallop · Filet Mignon (+$5) · Lobster (+$10). Type <strong>"TBD"</strong> to confirm 5–10 days before event.</small>
+              </label>
+              <textarea name="food_order" placeholder="e.g. 10 adults: 6 chicken, 4 steak — 3 kids: 3 chicken&#10;OR type TBD to confirm later" required></textarea>
             </div>
-            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;line-height:1.5">* Estimate only &amp;middot; Gratuity &amp; travel fee not included &amp;middot; Deposit 20–30% required.</div>
-          </div>
-          <input type="hidden" name="estimated_total" id="estimated_total_input" value="Not calculated (guest count not entered)">
-          <script>
-          function updateQuote(){
-            var a=parseInt(document.getElementById('calc_adults').value)||0;
-            var c=parseInt(document.getElementById('calc_children').value)||0;
-            var el=document.getElementById('price-estimate');
-            if(a===0&&c===0){el.style.display='none';document.getElementById('estimated_total_input').value='';return;}
-            var food=(a*55)+(c*30),min=550,foodFinal=Math.max(food,min);
-            var addons=0,addonLines=[];
-            if(document.getElementById('ao_gyoza')&&document.getElementById('ao_gyoza').checked){addons+=8;addonLines.push('Gyoza $8');}
-            if(document.getElementById('ao_edamame')&&document.getElementById('ao_edamame').checked){addons+=7;addonLines.push('Edamame $7');}
-            if(document.getElementById('ao_noodles')&&document.getElementById('ao_noodles').checked){addons+=5;addonLines.push('Noodles $5');}
-            var travel=0;
-            if(document.getElementById('travel_fee')&&document.getElementById('travel_fee').checked){travel=100;}
-            var grand=foodFinal+addons+travel;
-            var b='';
-            if(a>0) b+='<span>'+a+' adult'+(a>1?'s':'')+' × $55 = <strong>$'+(a*55)+'</strong></span>';
-            if(c>0) b+='<span>'+c+' child'+(c>1?'ren':'')+' × $30 = <strong>$'+(c*30)+'</strong></span>';
-            if(food<min) b+='<span>Min. <strong>$'+min+'</strong></span>';
-            if(addonLines.length>0) b+='<span>Add-ons: <strong>+$'+addons+'</strong></span>';
-            if(travel>0) b+='<span>Travel fee: <strong>+$100</strong></span>';
-            document.getElementById('price-breakdown').innerHTML=b;
-            document.getElementById('price-total').textContent='$'+grand.toLocaleString();
-            document.getElementById('price-note').textContent='estimated total';
-            el.style.display='block';
-            var summary='Estimated Total: $'+grand;
-            if(a>0) summary+=' | Adults: '+a+' × $55 = $'+(a*55);
-            if(c>0) summary+=' | Children: '+c+' × $30 = $'+(c*30);
-            if(food<min) summary+=' | $550 minimum applied';
-            if(addonLines.length>0) summary+=' | Add-ons: '+addonLines.join(', ')+' = $'+addons;
-            if(travel>0) summary+=' | Travel fee: $100';
-            document.getElementById('estimated_total_input').value=summary;
-          }
-          </script>
+            <div class="bf-group"><label>Food Allergies / Dietary Restrictions <span>*</span> <small style="font-weight:400;color:var(--text-muted)">(Gluten-free &amp; HALAL available)</small></label><textarea name="allergies" placeholder="List allergies or type 'None'" style="min-height:70px" required></textarea></div>
 
-          <div class="bf-section-title">Food Order</div>
-          <div class="bf-group">
-            <label>Food Order (2 proteins per adult · 2 per child) <span>*</span>
-              <small style="display:block;font-weight:400;color:var(--text-muted);margin-top:0.2rem">Proteins: Chicken · Steak · Shrimp · Salmon · Tofu · Scallop · Filet Mignon (+$5) · Lobster (+$10). Type <strong>"TBD"</strong> to confirm closer to event.</small>
-            </label>
-            <textarea name="food_order" placeholder="e.g. 10 adults: 6 chicken, 4 steak, 4 shrimp, 6 salmon&#10;&#10;— OR type TBD to confirm later" required></textarea>
-          </div>
-          <div class="bf-group"><label>Food Allergies or Dietary Restrictions <span>*</span> <small style="font-weight:400;color:var(--text-muted)">(Gluten-free &amp; HALAL available)</small></label><textarea name="allergies" placeholder="List any food allergies. Type 'None' if none." style="min-height:70px" required></textarea></div>
-
-          <div class="bf-section-title">Add-Ons &amp; Other Info</div>
-          <div class="bf-group">
-            <label>Appetizers &amp; Add-Ons</label>
-            <div style="display:flex;flex-direction:column;gap:0.5rem">
-              <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer"><input type="checkbox" id="ao_gyoza" name="addon_gyoza" value="Gyoza (6 pcs) $8" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px"> Gyoza (6 pcs) — $8</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer"><input type="checkbox" id="ao_edamame" name="addon_edamame" value="Edamame $7" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px"> Edamame — $7</label>
-              <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer"><input type="checkbox" id="ao_noodles" name="addon_noodles" value="Noodles $5" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px"> Noodles — $5</label>
+            <div class="bf-section-title">Add-Ons</div>
+            <div class="bf-group">
+              <div style="display:flex;flex-direction:column;gap:0.5rem">
+                <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer"><input type="checkbox" id="ao_gyoza" name="addon_gyoza" value="Gyoza (6 pcs) $8" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px"> Gyoza (6 pcs) — $8</label>
+                <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer"><input type="checkbox" id="ao_edamame" name="addon_edamame" value="Edamame $7" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px"> Edamame — $7</label>
+                <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer"><input type="checkbox" id="ao_noodles" name="addon_noodles" value="Noodles $5" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px"> Noodles — $5</label>
+              </div>
             </div>
-          </div>
-          <div class="bf-group">
-            <label style="display:flex;align-items:flex-start;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer;line-height:1.5;width:100%">
-              <input type="checkbox" id="travel_fee" name="travel_fee" value="Travel fee +$100" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px;margin-top:0.2rem">
-              <span style="flex:1;min-width:0"><strong>Travel Fee (+$100):</strong> My event is outside the Atlanta metro area</span>
-            </label>
-          </div>
-          <div class="bf-group"><label>Special Requests or Notes</label><textarea name="special_requests" placeholder="Any special setup requests, theme, or notes..." style="min-height:70px"></textarea></div>
-          <div class="bf-group"><label>How Did You Hear About Us? <span>*</span></label>
-            <select name="referral_source" required>
-              <option value="">Select...</option>
-              <option>Google Search</option><option>Instagram</option><option>TikTok</option>
-              <option>Facebook</option><option>Friend / Family Referral</option><option>Yelp</option>
-              <option>Returning Customer</option><option>Other</option>
-            </select>
-          </div>
-          <div class="bf-group"><label>Promotion Code (Optional)</label><input type="text" name="promo_code" placeholder="Enter promo code if you have one"></div>
+            <div class="bf-group">
+              <label style="display:flex;align-items:flex-start;gap:0.5rem;font-weight:400;font-size:0.95rem;cursor:pointer;line-height:1.5;width:100%">
+                <input type="checkbox" id="travel_fee" name="travel_fee" value="Travel fee +$100" onchange="updateQuote()" style="flex-shrink:0;width:16px;height:16px;margin-top:0.2rem">
+                <span style="flex:1;min-width:0"><strong>Travel Fee (+$100):</strong> My event is outside the Atlanta metro area</span>
+              </label>
+            </div>
 
-          <div class="bf-section-title">Terms &amp; Conditions</div>
-          <div class="bf-terms-box">
-            Everlasting Hibachi will NOT be liable for property damage caused at the Host's premises before, during, or after the event. The Host waives any claim against Everlasting Hibachi for any loss, damage, or destruction. A 20–30% non-refundable deposit is required to secure your event date. Cancellations made less than 72 hours before the event may forfeit the deposit. Final headcount and food orders must be received at least 5–10 days before the event or we reserve the right to cancel. Travel fees may apply based on your address.
-          </div>
-          <div class="bf-checkbox-row">
-            <input type="checkbox" id="terms_loc_Alabama" name="terms_agreed" value="Agreed" required>
-            <label for="terms_loc_Alabama">I have read and agree to the Terms &amp; Conditions and Travel Fee Policy. <span style="color:var(--primary-lt)">*</span></label>
-          </div>
-          <div style="background:var(--primary-bg);border-radius:var(--radius);padding:0.9rem 1.1rem;margin-bottom:1.25rem;font-size:0.85rem;color:var(--primary);font-weight:600">
-            ⚠️ Double-check: Cell phone # is correct and full event address is complete (House #, Street, Town, ZIP).
-          </div>
-          <button type="submit" class="bf-submit">🔥 Confirm Booking Request</button>
-          <p class="bf-note">We'll respond within 24 hours · No commitment until deposit is paid · Questions? Call (347) 653-8882</p>
+            <div class="bf-section-title">Other Info</div>
+            <div class="bf-group"><label>Special Requests <small style="font-weight:400;color:var(--text-muted)">(optional)</small></label><textarea name="special_requests" placeholder="Theme, setup notes, anything else..." style="min-height:70px"></textarea></div>
+            <div class="bf-group"><label>How Did You Hear About Us?</label>
+              <select name="referral_source">
+                <option value="">Select...</option>
+                <option>Google Search</option><option>Instagram</option><option>TikTok</option>
+                <option>Facebook</option><option>Friend / Family Referral</option><option>Yelp</option>
+                <option>Returning Customer</option><option>Other</option>
+              </select>
+            </div>
+
+            <div class="bf-terms-box" style="margin-top:1rem">
+              A 20–30% non-refundable deposit is required to secure your date. Cancellations less than 72 hours before the event may forfeit the deposit. Final headcount and food orders are due 5–10 days before the event. Everlasting Hibachi is not liable for property damage on the host's premises.
+            </div>
+            <div class="bf-checkbox-row">
+              <input type="checkbox" id="terms_loc_Alabama" name="terms_agreed" value="Agreed" required>
+              <label for="terms_loc_Alabama">I agree to the Terms &amp; Conditions above. <span style="color:var(--primary-lt)">*</span></label>
+            </div>
+            <div style="background:var(--primary-bg);border-radius:var(--radius);padding:0.9rem 1.1rem;margin-bottom:1.25rem;font-size:0.85rem;color:var(--primary);font-weight:600">
+              ⚠️ Double-check your cell phone # and full address (House #, Street, Town, ZIP).
+            </div>
+            <button type="submit" class="bf-submit">🔥 Submit Booking Request</button>
+            <button type="button" onclick="goStep1()" style="display:block;width:100%;margin-top:0.75rem;padding:0.75rem;background:none;border:1.5px solid var(--primary-lt);border-radius:var(--radius);color:var(--primary);font-size:0.95rem;cursor:pointer;font-weight:600">← Back to Step 1</button>
+            <p class="bf-note">We'll respond within 24 hours · Questions? Call (347) 653-8882</p>
+          </div><!-- /form-step-2 -->
         </form>
       </div>
     </div>
