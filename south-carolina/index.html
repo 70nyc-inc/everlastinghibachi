@@ -141,7 +141,7 @@
         <p>🍗 <strong>Protein Choices</strong> — 2 per adult · 2 per child: Chicken · Steak · Shrimp · Salmon · Tofu · Scallop &nbsp;·&nbsp; Upgrades: Filet Mignon +$5 · Lobster +$10</p>
       </div>
       <div class="bf-body">
-        <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="updateQuote()">
           <input type="hidden" name="access_key" value="bd4a4810-7d3c-4c8b-8e0d-a338bae94cf8">
           <input type="hidden" name="subject" value="🔥 New Hibachi Booking — South Carolina — Everlasting Hibachi">
           <input type="hidden" name="from_name" value="Everlasting Hibachi Website">
@@ -203,7 +203,7 @@
             </div>
             <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;line-height:1.5">* Estimate only &amp;middot; Gratuity &amp; travel fee not included &amp;middot; Deposit 20–30% required.</div>
           </div>
-          <input type="hidden" name="estimated_total" id="estimated_total_input" value="">
+          <input type="hidden" name="estimated_total" id="estimated_total_input" value="Not calculated (guest count not entered)">
           <script>
           function updateQuote(){
             var a=parseInt(document.getElementById('calc_adults').value)||0;

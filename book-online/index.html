@@ -87,8 +87,8 @@
         <form
           action="https://api.web3forms.com/submit"
           method="POST"
-          enctype="multipart/form-data"
           id="bookingForm"
+          onsubmit="updateQuote()"
         >
           <!-- Web3Forms config -->
           <input type="hidden" name="access_key" value="bd4a4810-7d3c-4c8b-8e0d-a338bae94cf8">
@@ -210,7 +210,7 @@
             </div>
             <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;line-height:1.5">* Estimate only · Gratuity &amp; travel fee not included · Deposit 20–30% required to secure your date.</div>
           </div>
-          <input type="hidden" name="estimated_total" id="estimated_total_input" value="">
+          <input type="hidden" name="estimated_total" id="estimated_total_input" value="Not calculated (guest count not entered)">
           <script>
           function updateQuote(){
             var a=parseInt(document.getElementById('calc_adults').value)||0;
