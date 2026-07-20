@@ -386,7 +386,7 @@ function makePage(type, data) {
   <meta charset="UTF-8">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSX45JTLDM"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NSX45JTLDM');</script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NSX45JTLDM');gtag('config','AW-18307599886');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hibachi at Home ${s.name} | Everlasting Hibachi | Private Chef ${s.abbr}</title>
   <meta name="description" content="Everlasting Hibachi brings a private hibachi chef to your backyard across ${s.name}. Serving ${s.cities.slice(0,5).join(', ')} and more. $55/adult, $550 minimum. Fire show included.">
